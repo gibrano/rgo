@@ -24,12 +24,10 @@ func main() {
 	file := "file='" + path + "/data.csv'"
 	predicter := "y"
 	out, _ := exec.Command("Rscript", "test.R", file, predicter).Output()
-	outsplit := strings.Split(fmt.Sprintf("%s", out), " /")
+	outsplit := strings.Split(fmt.Sprintf("%s", out), " ")
 
-	aux := strings.Split(outsplit[0], " ")
-
-	coef := make(map[string]float64, len(aux))
-	for _, c := range aux {
+	coef := make(map[string]float64, len(outsplit))
+	for _, c := range outsplit {
 		k := strings.Split(c, ":")
 		coef[k[0]], _ = strconv.ParseFloat(k[1], 64)
 	}
